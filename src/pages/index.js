@@ -18,13 +18,16 @@ function removeEmptyvalues(obj) {
   return obj.filter(filterform => filterform.name.trim().length > 0);
 }
 
+// create an encoder for a list 
+// 
+
 const EbayForm = () => {
 
   const [formValues, setFormValues] = useState([{ name: ""}])
   const [ebayData, setebayData] = useState([]);
   const [apiResult, setApiresult] = useState();
     
-  const callEbayapi= async() => {
+  const callEbayapi= async(keywordList) => {
     const headerOptions = {
       method: 'GET',
       headers: {
@@ -35,14 +38,16 @@ const EbayForm = () => {
     try{
       let response = await fetch(url, headerOptions);
       let datares = await response.json();
-      let status = datares.findItemsByKeywordsResponse[0].ack;
+      let status = datares.findItemsByKeywordsResponse[0].ack.toString().toLowerCase();
       let count = datares.findItemsByKeywordsResponse[0].searchResult[0]["@count"];
-      //console.log(count);
+      
+      //let callStatus = status
       setebayData(status);
       //console.log(datares);
-      if (status != 'Success'){
+      //console.log(callStatus);
+      if (status != 'success'){
         setApiresult(REQUEST_FAILURE);
-      }else if (status == 'Success' && count == 0 ){
+      }else if (status == 'success' && count == 0 ){
         setApiresult(NO_RESULTS)
       }else{
         setApiresult('Return results');
@@ -69,7 +74,7 @@ const EbayForm = () => {
     event.preventDefault();
     //check if fields are filled if not, remove them from array
     let cardInput = removeEmptyvalues(formValues);
-    callEbayapi(); 
+    callEbayapi(cardInput); 
     //console.log(ebayData);
   }
 
@@ -109,7 +114,11 @@ const EbayForm = () => {
       </Form>
       {/* API data results should populate below */}
       <Row>
+        <Col></Col>
+        <Col sm={10}>
             {apiResult}
+        </Col>
+        <Col></Col>
       </Row>
     </Container>
   )

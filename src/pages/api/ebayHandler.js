@@ -1,6 +1,7 @@
 const handler = async(req, res) =>{
     // const keyword = req.bod.keyword;
-
+    const keyword = req.query['keywords'];
+    //console.log(keyword);
     // ebay API credentials 
     const OPERATION_NAME = process.env.REACT_APP_OPERATION_NAME
     const SECURITY_APPNAME = process.env.REACT_APP_SECURITY_APPNAME
@@ -16,23 +17,16 @@ const handler = async(req, res) =>{
           'X-EBAY-SOA-RESPONSE-DATA-FORMAT': 'JSON',
           'X-EBAY-SOA-GLOBAL-ID': 'EBAY-US',
           'SERVICE-VERSION': '1.0.0',
-          'paginationInput.entriesPerPage': '3',
+          'paginationInput.entriesPerPage': '1',
           'REST-PAYLOAD': ''
         }
       }
-
-    // ebay url 
-    // 'https://svcs.sandbox.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsByKeywords&SERVICE-VERSION=1.0.0&SECURITY-APPNAME=RosannaL-cardvalu-SBX-c2e2968b1-9fbb1f02&RESPONSE-DATA-FORMAT=JSON&keywords=pokemon&paginationInput.entriesPerPage=2&itemFilter.name=SOLD_ITEMS_ONLY&itemFilter.value=true&REST-PAYLOAD'
-    // 
-    const url = new URL('https://svcs.sandbox.ebay.com/services/search/FindingService/v1');
-
-       url.searchParams.append('keywords', 'POKEMON');
-    // , headerOptions
-    // fetch ebay api 
+    const url = new URL('https://svcs.ebay.com/services/search/FindingService/v1');
+    // Attach keywords to url as query params 
+    url.searchParams.append('keywords', keyword);
     const response = await fetch(url, headerOptions);
     const data = await response.json();
-
-    return res.end(JSON.stringify(data));
+  return res.end(JSON.stringify(data));
 }
 
 export default handler

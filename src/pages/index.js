@@ -49,6 +49,7 @@ const EbayForm = () => {
       //const data = rateLimiterror;
 
       // checking returned data to create user response
+      // should this be another function ? 
       if (data.findCompletedItemsResponse){
         const status = await data.findCompletedItemsResponse[0].ack.toString().toLowerCase();
         if (status == 'success') {
@@ -112,7 +113,8 @@ const EbayForm = () => {
           <Col sm={10}>
             <br></br>
             <br></br>
-            <h2>Enter your card names below to get current estimated price</h2>
+            <h2>Enter your card name below to get current estimated price from Ebay</h2>
+            <h4>e.g "Origin Forme Palkia V - 167/189 - PSA 10"</h4>
             <br></br>
             {formValues.map((element, index) =>
               <Form.Group className="form-inline" key={index} controlId="ebaySubmitform">

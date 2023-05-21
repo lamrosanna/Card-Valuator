@@ -21,7 +21,7 @@ docker run --publish 3000:3000 cardvaluator
 
 Enter detailed information on the collectible you are evaluating in the input box. An example has been provided for you: "Origin Forme Palkia V - 167/189 - PSA 10" 
 
-![Ebay_valuer_screenshot](/eaby-card-valuer-api/public/public/ebay_valuer.png?raw=true "Provided Screenshot")
+![Ebay_valuer_screenshot](/public/public/ebay_valuer.png?raw=true "Provided Screenshot")
 
 ## Contribution 
 

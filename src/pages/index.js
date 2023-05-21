@@ -37,13 +37,12 @@ const EbayForm = () => {
     }
     // API URL
     const url = new URL(`/api/ebayHandler`, 'http://localhost:3000');
-    // encode string to be passed to server
-    const urlkeywords = encodeURIComponent(keywords);
-    url.searchParams.append('keywords', urlkeywords);
+    // add string to 'keywords' key to be passed to server
+    url.searchParams.append('keywords', keywords);
     try {
       const response = await fetch(url, headerOptions);
       const data = await response.json();
-
+      console.log(data)
       // testing with results.json file
       //const data = findCompletedItemsResponse;
       //const data = rateLimiterror;
@@ -59,7 +58,8 @@ const EbayForm = () => {
           }else{
             const itemPrices = data.findCompletedItemsResponse[0].searchResult[0]["item"].map(price => parseInt(price.sellingStatus[0].currentPrice[0]["__value__"]));
             const itemAverage = averagePrice(itemPrices).toFixed(2);
-            setebayData({item:keywords, count:count, average:itemAverage});
+            const itemCount = itemPrices.length;
+            setebayData({item:keywords, count:itemCount, average:itemAverage});
           }
         } else{
           setApiresult(REQUEST_ERROR);

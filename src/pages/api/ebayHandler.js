@@ -1,7 +1,6 @@
 const handler = async(req, res) =>{
     // const keyword = req.bod.keyword;
     const keyword = req.query['keywords'];
-    //console.log(keyword);
     // ebay API credentials
     const SECURITY_APPNAME = process.env.REACT_APP_SECURITY_APPNAME
 

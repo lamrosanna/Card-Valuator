@@ -21,6 +21,8 @@ docker run --publish 3000:3000 cardvaluator
 
 Enter detailed information on the collectible you are evaluating in the input box. An example has been provided for you: "Origin Forme Palkia V - 167/189 - PSA 10" 
 
+![Ebay_valuer_screenshot](/eaby-card-valuer-api/public/public/ebay_valuer.png?raw=true "Provided Screenshot")
+
 ## Contribution 
 
 This was a fun little project to help sell supplemental Pokemon cards from my collection :woman_shrugging:. Please feel free to let me know about any features that you would love to see added! :bulb:
